@@ -30,6 +30,9 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import appium.testUtils.BaseClass;
+import appium.testUtils.ExcelUtils;
+import appium.testUtils.ReusableMethods;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileDriver;
@@ -44,32 +47,24 @@ import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
-public class RealDevice {
+public class RealDevice extends BaseClass{
 
-	public AppiumDriver<MobileElement> driver;
-	private AppiumDriverLocalService service;
+	
 	private DesiredCapabilities dc;
 	String pack="com.android.calculator2";
 	String act="com.android.calculator2.Calculator";
-	String tpack="com.truecaller";
-	String tact="com.truecaller.ui.TruecallerInit";    //"com.truecaller.ui.TruecallerInit";
+	String tpack=ExcelUtils.getData("Mobile_Details", "pack");
+	String tact=ExcelUtils.getData("Mobile_Details", "act");   
 	
-	@BeforeTest
-	public void startServer()
-	{
-	    service = AppiumDriverLocalService.buildDefaultService();
-		service.start();
-		
-		
-	}
+
 	
 	@BeforeClass
 	public void setUp() throws Exception
 	{
 		
-		String DeviceName="Samsung";
-		String udid= "4d0a8332c821c000";//"4b18ae7"; // 
-		String version="7.1.2" ;//"9.0"; //
+		String DeviceName=ExcelUtils.getData("Mobile_Details", "DeviceName");
+		String udid= ExcelUtils.getData("Mobile_Details", "udid");
+		String version=ExcelUtils.getData("Mobile_Details", "version");
 
 	    dc=new DesiredCapabilities();
 		dc.setCapability("deviceName", DeviceName);
@@ -125,40 +120,7 @@ public class RealDevice {
 		
 		Thread.sleep(15000);
 	
-	int k=1;	
-		
-	while(j<k)
-	{
-		try {
-		if(driver.findElement(By.xpath("//android.widget.TextView[@text='Home Docomo']")).isDisplayed())
-			
-		{
-			j=k;
-			break;
-		}
-		}
-		catch(Exception e)
-		
-		{
-			    Dimension size = driver.manage().window().getSize();
-			    Double hs=size.getHeight()* 0.5;
-			    int hsi=hs.intValue();
-			    System.out.println(hsi);
-			   
-			    Double he=size.getHeight()* 0.1;
-			    int hei=he.intValue();
-			    
-			    System.out.println(hei);
-			 
-			    new TouchAction((PerformsTouchActions) driver)
-		                .press(PointOption.point(0, hsi))
-		                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(5)))
-		                .moveTo(PointOption.point(0, hei))
-		                .release().perform();
-			    k++;
-			
-		}
-	}
+		ReusableMethods.verticalScroll("//android.widget.TextView[@text='Home Docomo']");
 		
 		
 	}
@@ -166,14 +128,6 @@ public class RealDevice {
 	
 	
 	
-	@AfterTest
-	public void stopServer()
-	{
-		
 	
-		service.stop();
-		
-	
-}
 	
 }
