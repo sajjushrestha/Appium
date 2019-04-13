@@ -1,25 +1,10 @@
 package AppiumTest.com.appium;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
+
 import java.net.URL;
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,18 +19,16 @@ import appium.testUtils.BaseClass;
 import appium.testUtils.ExcelUtils;
 import appium.testUtils.ReusableMethods;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileDriver;
+
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
-import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
+
 
 public class RealDevice extends BaseClass{
 
@@ -94,16 +77,14 @@ public class RealDevice extends BaseClass{
 		String res=driver.findElement(By.id(pack+":id/result")).getText();
 		
 		System.out.println(res);
-		
-		
-		
+	
 	}
 	
-	@Test()
+	@Test(enabled=false)
 	
 	public void launchtrueCaller() throws Exception
 	{
-		
+		WebDriverWait wait=new WebDriverWait(driver,200);
 		driver.findElement(By.id(tpack+":id/nextButton")).click();
 		
 		driver.findElement(By.id("android:id/button2")).click();
@@ -113,21 +94,49 @@ public class RealDevice extends BaseClass{
 		driver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();
 		i++;
 		}
-		WebDriverWait wait=new WebDriverWait(driver,200);
+		
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id(tpack+":id/button_skip"))).click();
 		
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("android.widget.ImageButton"))).click();
 		
 		Thread.sleep(15000);
 	
-		ReusableMethods.verticalScroll("//android.widget.TextView[@text='Home Docomo']");
+		ReusableMethods.verticalScroll("//android.widget.TextView[@text='Prasad S']");
 		
+		WebElement ele=driver.findElement(By.xpath("//android.widget.TextView[@text='Prasad S']"));
 		
+		ReusableMethods.longPress(ele);
+		
+		ReusableMethods.longPress(ele);
+		
+		ele.click();
+		
+		String number=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.truecaller:id/buttonTextHeading"))).getText();
+		System.out.println(number);
+
 	}
 	
 	
+    @Test()
+	
+	public void launchDialer() throws Exception
+	{
+		
+    	WebDriverWait wait=new WebDriverWait(driver,200);
+	ReusableMethods.horizontalScroll();
+	
+	ReusableMethods.verticalScroll("//android.widget.TextView[@text='70138 75882']");
+	
+	driver.findElement(By.xpath("//android.widget.TextView[@text='70138 75882']")).click();
+	ReusableMethods.verticalScroll();
+	wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.android.dialer:id/details_action"))).click();
+	
+	
+	String number=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.android.dialer:id/date"))).getText();
+	System.out.println(number);
 	
 	
 	
+	}
 	
 }
