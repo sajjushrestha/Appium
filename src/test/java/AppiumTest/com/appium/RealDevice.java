@@ -106,7 +106,7 @@ public class RealDevice {
 	
 	@Test()
 	
-	public void launchtiktok() throws Exception
+	public void launchtrueCaller() throws Exception
 	{
 		
 		driver.findElement(By.id(tpack+":id/nextButton")).click();
