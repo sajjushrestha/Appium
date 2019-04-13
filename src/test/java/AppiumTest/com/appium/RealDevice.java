@@ -4,6 +4,7 @@ package AppiumTest.com.appium;
 import java.net.URL;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -48,10 +49,21 @@ public class RealDevice extends BaseClass{
 		String DeviceName=ExcelUtils.getData("Mobile_Details", "DeviceName");
 		String udid= ExcelUtils.getData("Mobile_Details", "udid");
 		String version=ExcelUtils.getData("Mobile_Details", "version");
-
-	    dc=new DesiredCapabilities();
+		
+		
+		dc=new DesiredCapabilities();
+		
+		if(!DeviceName.contains("Emulator"))
+		{
 		dc.setCapability("deviceName", DeviceName);
 		dc.setCapability("udid", udid);
+		}
+		else
+		{
+			dc.setCapability("deviceName", DeviceName);
+		}
+		
+		
 		dc.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);
 		dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
 		dc.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 100);
@@ -117,7 +129,7 @@ public class RealDevice extends BaseClass{
 	}
 	
 	
-    @Test()
+    @Test(enabled=false)
 	
 	public void launchDialer() throws Exception
 	{
@@ -138,5 +150,51 @@ public class RealDevice extends BaseClass{
 	
 	
 	}
+    
+    
+    @Test(enabled=false)
+	
+   	public void launchAPIDemos() throws Exception
+   	{
+   		
+       	WebDriverWait wait=new WebDriverWait(driver,200);
+       	
+       	ReusableMethods.verticalScroll("//android.widget.TextView[@text='Text']");
+       	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.widget.TextView[@text='Text']"))).click();
+       	
+       	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.widget.TextView[@text='LogTextBox']"))).click();
+       	wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.example.android.apis:id/add"))).click();
+    	
+    	
+    	String number=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.example.android.apis:id/text"))).getText();
+    	System.out.println(number);
+    
+       	 	
+   	}
+   	
+    
+    
+ @Test()
+	
+   	public void launchBrowser() throws Exception
+   	{
+   		
+       	WebDriverWait wait=new WebDriverWait(driver,200);
+       	
+     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.widget.TextView[@text='Top charts']")));
+   // wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.android.vending:id/search_box_idle_text"))).sendKeys("facebook");
+      // 	driver.hideKeyboard();
+    ReusableMethods.verticalScroll("//android.widget.TextView[@text='Comedy Games']");
+      // 	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.widget.Button[@content-desc='Google Search']"))).click();
+    	
+    	//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.view.View[contains(@content-desc,'https://m.facebook.com Link')]"))).click();
+       //		
+       	 	
+   	}
+   	
+    
+    
+    
+    
 	
 }

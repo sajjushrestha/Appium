@@ -62,7 +62,7 @@ public class ReusableMethods extends BaseClass{
 		    int hsi=hs.intValue();
 		    System.out.println(hsi);
 		   
-		    Double he=size.getHeight()* 0.1;
+		    Double he=size.getHeight()* 0.;
 		    int hei=he.intValue();
 		    
 		    System.out.println(hei);

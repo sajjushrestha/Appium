@@ -12,6 +12,33 @@ netstat -ano | find ":4723 "
 
 taskkill /pid 11488 /f
 ================================
+
+To find app activity and package in cmd prompt:
+
+C:\>adb shell
+
+1|root@generic:/ # dumpsys window windows | grep -E 'mCurrentFocus'
+
+  mCurrentFocus=Window{a619a9e8 u0 com.example.android.apis/com.example.android.apis.ApiDemos}
+root@generic:/ #
+
+=====================================
+
+Error obtaining UI hierarchy
+
+Reason:
+Error while obtaining UI hierarchy XML file: com.android.ddmlib.SyncException:
+Remote object doesn't exist!
+
+Solution:
+Go to command prompt, kill the server and start the server..
+$ adb kill-server
+$ adb start-server
+
+
+
+
+==============================================
 Code for starting Appium server with free port
 /*AppiumDriverLocalService service =AppiumDriverLocalService.buildService( new
 			      AppiumServiceBuilder().usingDriverExecutable(new File(

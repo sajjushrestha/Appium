@@ -16,7 +16,8 @@ public class App
     	
     	 ProcessBuilder processBuilder = new ProcessBuilder();
          // Windows
-         processBuilder.command("cmd.exe", "/C", "ping -n 3 google.com"); //"netstat -ano | find \" :4723\" ");
+         processBuilder.command("cmd.exe", "/C", "adb shell");
+         processBuilder.command("cmd.exe", "/C","dumpsys window windows | grep -E 'mCurrentFocus'"); //"netstat -ano | find \" :4723\" ");
 
          try {
 
