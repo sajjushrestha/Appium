@@ -15,7 +15,7 @@ taskkill /pid 11488 /f
 
 To find app activity and package in cmd prompt:
 
-C:\>adb shell
+C:\>adb shell "dumpsys window windows | grep -E 'mCurrentFocus'"
 
 1|root@generic:/ # dumpsys window windows | grep -E 'mCurrentFocus'
 

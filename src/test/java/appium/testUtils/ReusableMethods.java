@@ -107,22 +107,22 @@ public class ReusableMethods extends BaseClass{
 		}
 	
 	
-	public static String listDevice()
+	public static String listDevice(String cmd)
 	{
 		 ProcessBuilder processBuilder = new ProcessBuilder();
-        
+		 String line,s = "";
+		 if(cmd.equalsIgnoreCase("devices"))
+		 {
          processBuilder.command("cmd.exe", "/C", "adb devices");
        
-         String line,s = "";
+        
          try {
 
              Process process = processBuilder.start();
 
              BufferedReader reader =
                      new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-             
-             
+  
              while ((line = reader.readLine()) != null) {
             	 
                  System.out.println(line);
@@ -134,23 +134,125 @@ public class ReusableMethods extends BaseClass{
                      System.out.println(s);
     	
                  }
-                 
-                
+       
              }
 
-             int exitCode = process.waitFor();
-            
-         } catch (IOException e) {
-             e.printStackTrace();
-         } catch (InterruptedException e) {
+          
+         } catch (Exception e) {
              e.printStackTrace();
          }
+		 }
+		 
+		 if(cmd.equalsIgnoreCase("version"))
+		 { 
+			 processBuilder.command("cmd.exe", "/C", "adb shell \" cat /system/build.prop |grep ro.build.version.release\"");
+		       
+		        
+	         try {
+
+	             Process process = processBuilder.start();
+
+	             BufferedReader reader =
+	                     new BufferedReader(new InputStreamReader(process.getInputStream()));
+	  
+	             while ((line = reader.readLine()) != null) {
+	            	 
+	                 System.out.println(line); 
+	                 if(!line.startsWith("List"))
+	                 {
+	                	s=line.replace("ro.build.version.release=", "");
+	                    
+	                     System.out.println(s);
+	    	
+	                 }
+		 }
          
+      
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+		 }
+		 
+		 if(cmd.equalsIgnoreCase("name"))
+		 { 
+			 processBuilder.command("cmd.exe", "/C", "adb shell \" cat /system/build.prop |grep ro.product.brand\"");
+		       
+		        
+	         try {
+
+	             Process process = processBuilder.start();
+
+	             BufferedReader reader =
+	                     new BufferedReader(new InputStreamReader(process.getInputStream()));
+	  
+	             while ((line = reader.readLine()) != null) {
+	            	 
+	                 System.out.println(line); 
+	                 if(!line.startsWith("List"))
+	                 {
+	                	s=line.replace("grep ro.product.brand=", "");
+	                    
+	                     System.out.println(s);
+	    	
+	                 }
+		 }
+         
+      
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+		 }
+	   
 		return s;
     	
 	}
 	
-	
+	public static String listDevices(String cmd)
+	{
+		 ProcessBuilder processBuilder = new ProcessBuilder();
+		 String line,s = "";
+	    
+         processBuilder.command("cmd.exe", "/C", cmd);
+
+         try {
+
+             Process process = processBuilder.start();
+
+             BufferedReader reader =
+                     new BufferedReader(new InputStreamReader(process.getInputStream()));
+  
+             while ((line = reader.readLine()) != null) {
+            	 
+                 System.out.println(line);
+                 
+                 if(!line.startsWith("List"))
+                 {
+                	 if(cmd.contains("adb devices"))
+                	 {
+                	 s=line.replace("device", "");
+                	 }
+                	 if(cmd.contains("grep ro.build.version.release"))
+                	 {
+                	 s=line.replace("ro.build.version.release=", "");
+                	 }
+                     System.out.println(s);
+    	
+                 }
+       
+             }
+
+          
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+		 
+		 
+		 
+		 
+	   
+		return s;
+    	
+	}
 	
 	
 

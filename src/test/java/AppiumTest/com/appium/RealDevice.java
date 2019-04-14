@@ -19,16 +19,12 @@ import org.testng.annotations.Test;
 import appium.testUtils.BaseClass;
 import appium.testUtils.ExcelUtils;
 import appium.testUtils.ReusableMethods;
-import io.appium.java_client.AppiumDriver;
 
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
+
 
 
 public class RealDevice extends BaseClass{
@@ -46,9 +42,9 @@ public class RealDevice extends BaseClass{
 	public void setUp() throws Exception
 	{
 		
-		String DeviceName=ExcelUtils.getData("Mobile_Details", "DeviceName");
-		String udid= ReusableMethods.listDevice();   //ExcelUtils.getData("Mobile_Details", "udid");
-		String version=ExcelUtils.getData("Mobile_Details", "version");
+		String DeviceName=ReusableMethods.listDevice("name");//ExcelUtils.getData("Mobile_Details", "DeviceName");
+		String udid= ReusableMethods.listDevice("devices");   //ExcelUtils.getData("Mobile_Details", "udid");
+		String version=ReusableMethods.listDevice("version");  //ExcelUtils.getData("Mobile_Details", "version");
 		
 		
 		dc=new DesiredCapabilities();
@@ -62,11 +58,10 @@ public class RealDevice extends BaseClass{
 		{
 			dc.setCapability("deviceName", DeviceName);
 		}
-		
-		
+
 		dc.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);
 		dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
-		dc.setCapability(MobileCapabilityType.NO_RESET, true);
+		dc.setCapability(MobileCapabilityType.NO_RESET, false);
 		dc.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 100);
 		dc.setCapability("appPackage", tpack);  //com.google.android.calculator
 		dc.setCapability("appActivity", tact);
@@ -93,7 +88,7 @@ public class RealDevice extends BaseClass{
 	
 	}
 	
-	@Test(enabled=false)
+	@Test(enabled=true)
 	
 	public void launchtrueCaller() throws Exception
 	{
@@ -113,10 +108,12 @@ public class RealDevice extends BaseClass{
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.className("android.widget.ImageButton"))).click();
 		
 		Thread.sleep(15000);
-	
-		ReusableMethods.verticalScroll("//android.widget.TextView[@text='Prasad S']");
 		
-		WebElement ele=driver.findElement(By.xpath("//android.widget.TextView[@text='Prasad S']"));
+		String name="Nepal Num";
+	
+		ReusableMethods.verticalScroll("//android.widget.TextView[@text='"+name+"']");
+		
+		WebElement ele=driver.findElement(By.xpath("//android.widget.TextView[@text='"+name+"']"));
 		
 		ReusableMethods.longPress(ele);
 		
@@ -193,27 +190,7 @@ public class RealDevice extends BaseClass{
        	 	
    	}
    	
-    @Test()
- public void launchtrueCaller2() throws Exception
-	{
-		WebDriverWait wait=new WebDriverWait(driver,200);
-		
-	
-		ReusableMethods.verticalScroll("//android.widget.TextView[@text='Babu Painter']");
-		
-		WebElement ele=driver.findElement(By.xpath("//android.widget.TextView[@text='Babu Painter']"));
-		
-		ReusableMethods.longPress(ele);
-		
-		ReusableMethods.longPress(ele);
-		
-		ele.click();
-		
-		String number=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.truecaller:id/buttonTextHeading"))).getText();
-		System.out.println(number);
-
-	}
-	
+   
     
     
 	
