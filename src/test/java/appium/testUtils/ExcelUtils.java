@@ -4,6 +4,7 @@ package appium.testUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -11,7 +12,9 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -95,10 +98,10 @@ public void method()
 		}
 		
 	
-		/*public static void writeData(int r , int c,String value) throws IOException, Exception, InvalidFormatException
+		/*public static void putData(String sheetname,String col_name,String value) throws IOException, Exception, InvalidFormatException
 		 {
 			
-			File file=new File("D:\\Screenshots\\JIRA.xlsx");
+			File file=new File(".\\DataSheet\\Appium.xlsx");
 			FileInputStream fis=new FileInputStream(file);
 			Workbook wb=WorkbookFactory.create(fis);
 			Sheet sheet = wb.getSheetAt(0);
@@ -112,11 +115,11 @@ public void method()
 			
 			fos.close();
 			
-		
+		 }	
+			*/
 			
 			
-			
-		 }*/
+		 
 		
 
 

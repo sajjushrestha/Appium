@@ -1,5 +1,8 @@
 package appium.testUtils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -102,6 +105,54 @@ public class ReusableMethods extends BaseClass{
 	             .release().perform();
 		
 		}
+	
+	
+	public static String listDevice()
+	{
+		 ProcessBuilder processBuilder = new ProcessBuilder();
+        
+         processBuilder.command("cmd.exe", "/C", "adb devices");
+       
+         String line,s = "";
+         try {
+
+             Process process = processBuilder.start();
+
+             BufferedReader reader =
+                     new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+             
+             
+             while ((line = reader.readLine()) != null) {
+            	 
+                 System.out.println(line);
+                 
+                 if(!line.startsWith("List"))
+                 {
+                	 s=line.replace("device", "");
+                    
+                     System.out.println(s);
+    	
+                 }
+                 
+                
+             }
+
+             int exitCode = process.waitFor();
+            
+         } catch (IOException e) {
+             e.printStackTrace();
+         } catch (InterruptedException e) {
+             e.printStackTrace();
+         }
+         
+		return s;
+    	
+	}
+	
+	
+	
+	
 
 	}
 	

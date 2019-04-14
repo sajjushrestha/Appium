@@ -14,10 +14,11 @@ public class App
     public static void main( String[] args ) throws Exception
     {
     	
-    	 ProcessBuilder processBuilder = new ProcessBuilder();
+    	
+    	/* ProcessBuilder processBuilder = new ProcessBuilder();
          // Windows
-         processBuilder.command("cmd.exe", "/C", "adb shell");
-         processBuilder.command("cmd.exe", "/C","dumpsys window windows | grep -E 'mCurrentFocus'"); //"netstat -ano | find \" :4723\" ");
+         processBuilder.command("cmd.exe", "/C", "adb devices");
+        // processBuilder.command("cmd.exe", "/C","dumpsys window windows | grep -E 'mCurrentFocus'"); //"netstat -ano | find \" :4723\" ");
 
          try {
 
@@ -28,18 +29,29 @@ public class App
 
              String line;
              while ((line = reader.readLine()) != null) {
+            	 
                  System.out.println(line);
+                 
+                 if(!line.startsWith("List"))
+                 {
+                	 String s=line.replace("device", "");
+                    
+                     System.out.println(s);
+                     
+                	
+                 }
+                 
+                
              }
 
              int exitCode = process.waitFor();
-             System.out.println("\nExited with error code : " + exitCode);
-
+            
          } catch (IOException e) {
              e.printStackTrace();
          } catch (InterruptedException e) {
              e.printStackTrace();
          }
-    	
+    	*/
     	
     	
     	

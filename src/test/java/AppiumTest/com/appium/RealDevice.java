@@ -47,7 +47,7 @@ public class RealDevice extends BaseClass{
 	{
 		
 		String DeviceName=ExcelUtils.getData("Mobile_Details", "DeviceName");
-		String udid= ExcelUtils.getData("Mobile_Details", "udid");
+		String udid= ReusableMethods.listDevice();   //ExcelUtils.getData("Mobile_Details", "udid");
 		String version=ExcelUtils.getData("Mobile_Details", "version");
 		
 		
@@ -66,6 +66,7 @@ public class RealDevice extends BaseClass{
 		
 		dc.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);
 		dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
+		dc.setCapability(MobileCapabilityType.NO_RESET, true);
 		dc.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 100);
 		dc.setCapability("appPackage", tpack);  //com.google.android.calculator
 		dc.setCapability("appActivity", tact);
@@ -174,7 +175,7 @@ public class RealDevice extends BaseClass{
    	
     
     
- @Test()
+ @Test(enabled=false)
 	
    	public void launchBrowser() throws Exception
    	{
@@ -192,8 +193,27 @@ public class RealDevice extends BaseClass{
        	 	
    	}
    	
-    
-    
+    @Test()
+ public void launchtrueCaller2() throws Exception
+	{
+		WebDriverWait wait=new WebDriverWait(driver,200);
+		
+	
+		ReusableMethods.verticalScroll("//android.widget.TextView[@text='Babu Painter']");
+		
+		WebElement ele=driver.findElement(By.xpath("//android.widget.TextView[@text='Babu Painter']"));
+		
+		ReusableMethods.longPress(ele);
+		
+		ReusableMethods.longPress(ele);
+		
+		ele.click();
+		
+		String number=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.truecaller:id/buttonTextHeading"))).getText();
+		System.out.println(number);
+
+	}
+	
     
     
 	
