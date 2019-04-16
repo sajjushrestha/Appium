@@ -45,15 +45,14 @@ public class Emulator {
 		
 		
 		File appDir=new File("C:\\eclipse-WS\\com.appium\\apk");
-		File app=new File(appDir,"bookmyshow-5-5-2.apk"); //
-		//File app=new File(appDir,"google-play-services-16-1-53-000300-242560017.apk");
+		File app=new File(appDir,"selendroid-test-app-0.17.0.apk"); //
 		DesiredCapabilities dc=new DesiredCapabilities();
 
 		dc.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);
 		
 		dc.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
 		dc.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
-		dc.setCapability(MobileCapabilityType.NO_RESET, true);
+		dc.setCapability(MobileCapabilityType.NO_RESET, false);
 		dc.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 100);
 		driver=new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),dc);
 		

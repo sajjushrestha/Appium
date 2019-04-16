@@ -29,48 +29,7 @@ import io.appium.java_client.remote.MobilePlatform;
 
 public class RealDevice extends BaseClass{
 
-	
-	private DesiredCapabilities dc;
-	String pack="com.android.calculator2";
-	String act="com.android.calculator2.Calculator";
-	String tpack=ExcelUtils.getData("Mobile_Details", "pack");
-	String tact=ExcelUtils.getData("Mobile_Details", "act");   
-	
 
-	
-	@BeforeClass
-	public void setUp() throws Exception
-	{
-		
-		String DeviceName=ReusableMethods.listDevice("name");//ExcelUtils.getData("Mobile_Details", "DeviceName");
-		String udid= ReusableMethods.listDevice("devices");   //ExcelUtils.getData("Mobile_Details", "udid");
-		String version=ReusableMethods.listDevice("version");  //ExcelUtils.getData("Mobile_Details", "version");
-		
-		
-		dc=new DesiredCapabilities();
-		
-		if(!DeviceName.contains("Emulator"))
-		{
-		dc.setCapability("deviceName", DeviceName);
-		dc.setCapability("udid", udid);
-		}
-		else
-		{
-			dc.setCapability("deviceName", DeviceName);
-		}
-
-		dc.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);
-		dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
-		dc.setCapability(MobileCapabilityType.NO_RESET, false);
-		dc.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 100);
-		dc.setCapability("appPackage", tpack);  //com.google.android.calculator
-		dc.setCapability("appActivity", tact);
-		
-		driver=new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),dc);
-		
-		Thread.sleep(3000);
-	}
-	
 	
 	@Test(enabled=false)
 	
@@ -88,7 +47,7 @@ public class RealDevice extends BaseClass{
 	
 	}
 	
-	@Test(enabled=true)
+	@Test(enabled=false)
 	
 	public void launchtrueCaller() throws Exception
 	{
@@ -121,6 +80,9 @@ public class RealDevice extends BaseClass{
 		
 		ele.click();
 		
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.widget.CheckedTextView[@text='View profile']"))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("android:id/button1"))).click();
+		
 		String number=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.truecaller:id/buttonTextHeading"))).getText();
 		System.out.println(number);
 
@@ -144,8 +106,7 @@ public class RealDevice extends BaseClass{
 	
 	String number=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.android.dialer:id/date"))).getText();
 	System.out.println(number);
-	
-	
+
 	
 	}
     
@@ -191,7 +152,27 @@ public class RealDevice extends BaseClass{
    	}
    	
    
-    
+ @Test(enabled=true)
+	
+	public void launchTestApp() throws Exception
+	{
+		
+    	WebDriverWait wait=new WebDriverWait(driver,200);
+    	
+  wait.until(ExpectedConditions.presenceOfElementLocated(By.id("io.selendroid.testapp:id/touchTest"))).click();
+  wait.until(ExpectedConditions.presenceOfElementLocated(By.id("io.selendroid.testapp:id/LinearLayout1"))).click();
+  
+  
+  String type=wait.until(ExpectedConditions.presenceOfElementLocated(By.id("io.selendroid.testapp:id/gesture_type_text_view"))).getText();
+ System.out.println(type);
+ 
+  if(type.equals("SINGLE TAP CONFIRMED"))
+  {
+	  System.out.println("PASS");
+  }
+  
+	}
+
     
 	
 }
