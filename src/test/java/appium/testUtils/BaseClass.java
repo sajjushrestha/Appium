@@ -23,7 +23,7 @@ public class BaseClass {
 	
 	public static AppiumDriver<MobileElement> driver;
 	private AppiumDriverLocalService service;
-	private DesiredCapabilities dc;
+	protected DesiredCapabilities dc;
 	protected String pack="com.android.calculator2";
 	protected String act="com.android.calculator2.Calculator";
 	protected String tpack=ExcelUtils.getData("Mobile_Details", "pack");
@@ -78,6 +78,7 @@ public class BaseClass {
 	
 	}
 	
+	
 	@BeforeClass
 	public void setUp() throws Exception
 	{
@@ -85,11 +86,15 @@ public class BaseClass {
 		String DeviceName=ReusableMethods.listDevice("name");//ExcelUtils.getData("Mobile_Details", "DeviceName");
 		String udid= ReusableMethods.listDevice("devices");   //ExcelUtils.getData("Mobile_Details", "udid");
 		String version=ReusableMethods.listDevice("version");  //ExcelUtils.getData("Mobile_Details", "version");
-		
+		if(DeviceName.isEmpty() || version.isEmpty())
+		{
+			DeviceName=ExcelUtils.getData("Mobile_Details", "DeviceName");
+			version=ExcelUtils.getData("Mobile_Details", "version");
+		}
 		
 		dc=new DesiredCapabilities();
 		
-		if(!DeviceName.contains("Emulator"))
+		if(!DeviceName.contains("emulator"))
 		{
 		dc.setCapability("deviceName", DeviceName);
 		dc.setCapability("udid", udid);
@@ -110,7 +115,6 @@ public class BaseClass {
 		
 		Thread.sleep(3000);
 	}
-	
 	
 	
 	

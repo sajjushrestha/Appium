@@ -45,7 +45,7 @@ public class Emulator {
 		
 		
 		File appDir=new File("C:\\eclipse-WS\\com.appium\\apk");
-		File app=new File(appDir,"selendroid-test-app-0.17.0.apk"); //
+		File app=new File(appDir,"base.apk"); //
 		DesiredCapabilities dc=new DesiredCapabilities();
 
 		dc.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);

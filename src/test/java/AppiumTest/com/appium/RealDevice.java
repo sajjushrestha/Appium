@@ -29,7 +29,7 @@ import io.appium.java_client.remote.MobilePlatform;
 
 public class RealDevice extends BaseClass{
 
-
+	
 	
 	@Test(enabled=false)
 	
@@ -47,7 +47,7 @@ public class RealDevice extends BaseClass{
 	
 	}
 	
-	@Test(enabled=false)
+	@Test(enabled=true)
 	
 	public void launchtrueCaller() throws Exception
 	{
@@ -143,8 +143,10 @@ public class RealDevice extends BaseClass{
      wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.widget.TextView[@text='Top charts']")));
    // wait.until(ExpectedConditions.presenceOfElementLocated(By.id("com.android.vending:id/search_box_idle_text"))).sendKeys("facebook");
       // 	driver.hideKeyboard();
+    
+    
     ReusableMethods.verticalScroll("//android.widget.TextView[@text='Comedy Games']");
-      // 	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.widget.Button[@content-desc='Google Search']"))).click();
+      //// 	wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.widget.Button[@content-desc='Google Search']"))).click();
     	
     	//wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//android.view.View[contains(@content-desc,'https://m.facebook.com Link')]"))).click();
        //		
@@ -152,7 +154,7 @@ public class RealDevice extends BaseClass{
    	}
    	
    
- @Test(enabled=true)
+ @Test(enabled=false)
 	
 	public void launchTestApp() throws Exception
 	{

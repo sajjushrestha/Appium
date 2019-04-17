@@ -34,11 +34,43 @@ Solution:
 Go to command prompt, kill the server and start the server..
 $ adb kill-server
 $ adb start-server
+===========================================
+Gennymotion emulator :
+1)	Open Genymotion shell and type below:
+Genymotion Shell > devices list
+Available devices:
 
+ Id | Select |    Status     |   Type   |   IP Address    |      Name
+----+--------+---------------+----------+-----------------+---------------
+  0 |    *   |            On |  virtual | 192.168.111.102 | Samsung Galaxy S9 - 8.0 - API 26 - 1440x2960
+2)	Open cmd prompt:
+3)	adb connect 192.168.111.102:5555
+4)	adb devices
+==================================================
+To list packages of installed apps in the connected device:
+adb shell "pm list packages |grep io.selendroid.testapp"
 
-
+To see the activty of the package:
+adb shell "pm list packages |grep io.selendroid.testapp"
 
 ==============================================
+To pull apk from real device and install in emualator in cmd:
+
+1)List packages of the apps in real device
+adb shell pm list packages
+
+2)select one package of target app and write below command:
+adb shell pm path com.truecaller
+
+3)Now the beow command copies the apk file from real device location to local path of system
+adb pull /data/app/com.truecaller-j_ZGUUrr21ZQ8RW3Y4vHEg==/base.apk  C:\eclipse-WS\com.appium\apk
+
+4)Disconnect the real device and enter below command
+adb install C:\eclipse-WS\com.appium\apk\base.apk
+
+
+====================================================
+
 Code for starting Appium server with free port
 /*AppiumDriverLocalService service =AppiumDriverLocalService.buildService( new
 			      AppiumServiceBuilder().usingDriverExecutable(new File(
@@ -48,63 +80,3 @@ Code for starting Appium server with free port
 		*/
 		
 ======================================
-long press on object:
- int pressX = driver.manage().window().getSize().width / 2;
-		    // 4/5 of the screen as the bottom finger-press point
-		    int bottomY = driver.manage().window().getSize().height * 4/5;
-		    // just non zero point, as it didn't scroll to zero normally
-		    int topY = driver.manage().window().getSize().height / 8;
-		    
-		    TouchAction touchAction = new TouchAction(driver);
-		    touchAction.longPress(PointOption.point(0, 0)).moveTo(PointOption.point(0, 250)).release().perform();
-		    
-#Touch Options		    
- Dimension size = driver.manage().window().getSize();
-	        int anchor = (int) (size.width * 0.6);
-	        int startPoint = (int) (size.height * 0.3);
-	        int endPoint = (int) (size.height * 0.5);
-	 
-	        new TouchAction(driver)
-	                .press(PointOption.point(anchor, startPoint))
-	                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-	                .moveTo(PointOption.point(anchor, endPoint))
-	                .release().perform();
-	                
-	                
-============================================	               
-	                Swipe Vertical untill particular element:
-			  int k=1;	
-		
-	while(j<k)
-	{
-		try {
-		if(driver.findElement(By.xpath("//android.widget.TextView[@text='Prasad S']")).isDisplayed())
-			
-		{
-			j=k;
-			break;
-		}
-		}
-		catch(Exception e)
-		
-		{
-			    Dimension size = driver.manage().window().getSize();
-			    Double hs=size.getHeight()* 0.5;
-			    int hsi=hs.intValue();
-			    System.out.println(hsi);
-			   
-			    Double he=size.getHeight()* 0.1;
-			    int hei=he.intValue();
-			    
-			    System.out.println(hei);
-			 
-			    new TouchAction((PerformsTouchActions) driver)
-		                .press(PointOption.point(0, hsi))
-		                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(5)))
-		                .moveTo(PointOption.point(0, hei))
-		                .release().perform();
-			    k++;
-			
-		}
-	}
-			

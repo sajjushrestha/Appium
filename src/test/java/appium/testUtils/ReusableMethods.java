@@ -141,6 +141,7 @@ public class ReusableMethods extends BaseClass{
          } catch (Exception e) {
              e.printStackTrace();
          }
+         return s;
 		 }
 		 
 		 if(cmd.equalsIgnoreCase("version"))
@@ -171,6 +172,7 @@ public class ReusableMethods extends BaseClass{
          } catch (Exception e) {
              e.printStackTrace();
          }
+	         return s;
 		 }
 		 
 		 if(cmd.equalsIgnoreCase("name"))
@@ -190,7 +192,7 @@ public class ReusableMethods extends BaseClass{
 	                 System.out.println(line); 
 	                 if(!line.startsWith("List"))
 	                 {
-	                	s=line.replace("grep ro.product.brand=", "");
+	                	s=line.replace("ro.product.brand=", "");
 	                    
 	                     System.out.println(s);
 	    	
@@ -201,9 +203,12 @@ public class ReusableMethods extends BaseClass{
          } catch (Exception e) {
              e.printStackTrace();
          }
+	         
+	         return s;
 		 }
-	   
 		return s;
+	   
+		
     	
 	}
 	
