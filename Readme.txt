@@ -28,12 +28,27 @@ Error obtaining UI hierarchy
 
 Reason:
 Error while obtaining UI hierarchy XML file: com.android.ddmlib.SyncException:
-Remote object doesn't exist!
+Remote object doesn't exist!'
+
+Method -1
 
 Solution:
 Go to command prompt, kill the server and start the server..
 $ adb kill-server
 $ adb start-server
+
+Other way Method -2
+
+This is what I’ve been doing:
+
+Save the following commands as a batch or shell script.
+adb shell uiautomator dump
+adb pull /sdcard/window_dump.xml ui.uix
+adb shell screencap -p /sdcard/ui.png
+adb pull /sdcard/ui.png .
+
+Run the script. It will generate ‘ui.uix’ and ‘ui.png’ files in current directory.
+Load the ‘ui.uix’ and ‘ui.png’ files into ui automator viewer by clicking ‘Open’ button.
 ===========================================
 Gennymotion emulator :
 1)	Open Genymotion shell and type below:

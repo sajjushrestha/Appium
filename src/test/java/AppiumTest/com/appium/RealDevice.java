@@ -56,7 +56,7 @@ public class RealDevice extends BaseClass{
 		
 		driver.findElement(By.id("android:id/button2")).click();
 		int i=0,j=0;
-		while(i<3)
+		while(i<4)
 		{
 		driver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();
 		i++;

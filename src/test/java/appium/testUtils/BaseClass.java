@@ -28,7 +28,8 @@ public class BaseClass {
 	protected String act="com.android.calculator2.Calculator";
 	protected String tpack=ExcelUtils.getData("Mobile_Details", "pack");
 	protected String tact=ExcelUtils.getData("Mobile_Details", "act");   
-	
+	protected String zpack=ExcelUtils.getData("zomato", "pack");
+	protected String zact=ExcelUtils.getData("zomato", "act");   
 	
 	@BeforeSuite
 	public void appiumServerKiller()
@@ -106,10 +107,10 @@ public class BaseClass {
 
 		dc.setCapability(MobileCapabilityType.PLATFORM_NAME,MobilePlatform.ANDROID);
 		dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, version);
-		dc.setCapability(MobileCapabilityType.NO_RESET, false);
+		dc.setCapability(MobileCapabilityType.NO_RESET, true);
 		dc.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 100);
-		dc.setCapability("appPackage", tpack);  //com.google.android.calculator
-		dc.setCapability("appActivity", tact);
+		dc.setCapability("appPackage", zpack);  //com.google.android.calculator
+		dc.setCapability("appActivity", zact);
 		
 		driver=new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),dc);
 		
