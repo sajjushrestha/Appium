@@ -1,8 +1,6 @@
 package AppiumTest.com.appium;
 
 
-import java.net.URL;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
