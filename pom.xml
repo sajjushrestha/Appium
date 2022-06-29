@@ -21,7 +21,7 @@
 		<org.apache.maven.plugins.maven-compiler-plugin.version>3.5</org.apache.maven.plugins.maven-compiler-plugin.version>
 		<org.codehaus.mojo.exec-maven-plugin.version>1.5.0</org.codehaus.mojo.exec-maven-plugin.version>
 		<org.apache.maven.plugins.maven-surefire-plugin.version>2.19</org.apache.maven.plugins.maven-surefire-plugin.version>
-		<org.apache.poi>4.0.1</org.apache.poi>
+		<org.apache.poi>4.1.1</org.apache.poi>
 	</properties>
 
   <dependencies>
